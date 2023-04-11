@@ -11,8 +11,8 @@ vector<vector<int>> cuadradoK; // Cuadrado magico K-esimo
 int cant_cuadrados = 0; // Indica el numero de cuadrados magicos encontrados
 bool encontrado = false; // Indica si se encontro el cuadrado magico
 int N, K;
-vector<int> col_suma; // Suma de cada columna
-int fila_suma = 0, diag_suma = 0, diag2_suma = 0; // Suma de cada fila, diagonal principal y diagonal secundaria
+vector<int> col_suma, fila_suma;
+int diag_suma = 0, diag2_suma = 0; // Suma de cada fila, diagonal principal y diagonal secundaria
 int numero_magico;
 
 
@@ -86,11 +86,11 @@ bool sumasParciales(const vector<vector<int>>& C, int i, int j){
 bool sumasActuales(unsigned long n, int i, int j, int elem){
     /*
      */
-    if (fila_suma + elem > numero_magico){return false;}
+    if (fila_suma[i] + elem > numero_magico){return false;}
     if (col_suma[j] + elem > numero_magico){return false;}
     if (i == j && diag_suma + elem > numero_magico){return false;}
     if (n-1-i == j && diag2_suma + elem > numero_magico){return false;}
-    fila_suma = fila_suma + elem;
+    fila_suma[i] = fila_suma[i] + elem;
     col_suma[j] = col_suma[j] + elem;
     if (i == j){diag_suma = diag_suma + elem;}
     if (n-1-i == j){diag2_suma = diag2_suma + elem;}
@@ -107,8 +107,7 @@ void cuadradoMagicoK(vector<vector<int>> C, int i, int j, vector<int> e){
             encontrado = (cant_cuadrados == K);
             if (encontrado){cuadradoK = C;}
         } else {
-            if (fila_suma != numero_magico){return;}
-            fila_suma = 0;
+            if (fila_suma[i] != numero_magico){return;}
             return cuadradoMagicoK(C, i+1, 0, e);
         }
     } else {
@@ -131,7 +130,7 @@ void cuadradoMagicoK(vector<vector<int>> C, int i, int j, vector<int> e){
             vector<int> e2 = e;
             e2.erase(e2.begin()+k);
             cuadradoMagicoK(C, i, j+1, e2);
-            fila_suma = fila_suma - e[k];
+            fila_suma[i] = fila_suma[i] - e[k];
             col_suma[j] = col_suma[j] - e[k];
             if (i == j){diag_suma = diag_suma - e[k];}
             if (C.size()-1-i == j){diag2_suma = diag2_suma - e[k];}
@@ -141,9 +140,9 @@ void cuadradoMagicoK(vector<vector<int>> C, int i, int j, vector<int> e){
 
 int main(){
     cout << "Ejercicio Backtracking: Orden lexicografico de cuadrados magicos" << endl;
-//    cin >> N >> K;
-    N = 3;
-    K = 2;
+    cin >> N >> K;
+//    N = 3;
+//    K = 2;
     unsigned t0, t1;
     vector<int> elementos;
     for (int i = 1; i <= N*N; i++){
@@ -151,6 +150,9 @@ int main(){
     }
     for (int i = 0; i < N; i++){
         col_suma.push_back(0);
+    }
+    for (int i = 0; i < N; i++){
+        fila_suma.push_back(0);
     }
     numero_magico = (N*N*N + N)/2;
     t0 = clock();
