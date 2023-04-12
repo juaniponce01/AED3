@@ -27,7 +27,7 @@ def subconjuntoMaximo(c, i):
         c2.add(i)
         subconjuntoMaximo(c2, i+1)
 
-subconjuntoMaximo(set(), 0)  
-print(cMax)
+# subconjuntoMaximo(set(), 0)  
+# print(cMax)
 
 
