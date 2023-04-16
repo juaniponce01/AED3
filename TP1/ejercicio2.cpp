@@ -6,20 +6,25 @@
 
 using namespace std;
 
-void operadores(int i, int t){
+int N, divisor, resto; // parametros de entrada
+int suma, mult, expo, res; // suma, multiplicacion, exponenciacion, resta
+vector<int> v; // vector de numeros
+
+
+bool operadores(int i, int t){
     if (i == N){
         if (t % divisor == resto){
-            cout << "Si" << endl;
-        }else{
-            cout << "No" << endl;
+            return true;
+        } else {
+            return false;
         }
     } else {
-        s = operadores(i+1, t+v[i]);
-        m = operadores(i+1, t*v[i]);
-        e = operadores(i+1, t**v[i]);
-        r = operadores(i+1, t-v[i]);
+        suma = operadores(i+1, (t+v[i]) % divisor);
+        mult = operadores(i+1, (t*v[i]) % divisor);
+//        expo = operadores(i+1, pow(t, v[i]) % divisor);
+        res = operadores(i+1, t-v[i]);
 
-        return s or m or e or r;
+        return suma or mult or expo or res;
     }
 }
 
@@ -41,12 +46,15 @@ vector<string> split(string str, string separador){
 
 int main(){
     cout << "Ejercicio Programacion Dinamica: Operadores" << endl;
+    int casos;
     cin >> casos;
-    for (int i = 0, i < casos, i++){
+    for (int i = 0; i < casos; i++){
         cin >> N >> resto >> divisor;
-        cin >> numeros;
 
-        v = split(numeros, " ");
+
+        for (int j = 0; j < N; j++){
+            cin >> v[j];
+        }
 
         unsigned t0, t1;
 
@@ -57,6 +65,7 @@ int main(){
         double time = (double(t1-t0)/CLOCKS_PER_SEC);
         cout << "Execution Time: " << time << " seg" << endl;
     }
-
+    cout << casos << endl;
+    cout << numeros << endl;
     return 0;
 }

@@ -41,41 +41,66 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target TP1
+# Object build statements for EXECUTABLE target EJ1
 
 
 #############################################
-# Order-only phony target for TP1
+# Order-only phony target for EJ1
 
-build cmake_object_order_depends_target_TP1: phony || CMakeFiles/TP1.dir
+build cmake_object_order_depends_target_EJ1: phony || CMakeFiles/EJ1.dir
 
-build CMakeFiles/TP1.dir/ejercicio1.cpp.o: CXX_COMPILER__TP1_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/ejercicio1.cpp || cmake_object_order_depends_target_TP1
-  DEP_FILE = CMakeFiles/TP1.dir/ejercicio1.cpp.o.d
+build CMakeFiles/EJ1.dir/ejercicio1.cpp.o: CXX_COMPILER__EJ1_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/ejercicio1.cpp || cmake_object_order_depends_target_EJ1
+  DEP_FILE = CMakeFiles/EJ1.dir/ejercicio1.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++17
-  OBJECT_DIR = CMakeFiles/TP1.dir
-  OBJECT_FILE_DIR = CMakeFiles/TP1.dir
-
-build CMakeFiles/TP1.dir/ejercicio2.cpp.o: CXX_COMPILER__TP1_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/ejercicio2.cpp || cmake_object_order_depends_target_TP1
-  DEP_FILE = CMakeFiles/TP1.dir/ejercicio2.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++17
-  OBJECT_DIR = CMakeFiles/TP1.dir
-  OBJECT_FILE_DIR = CMakeFiles/TP1.dir
+  OBJECT_DIR = CMakeFiles/EJ1.dir
+  OBJECT_FILE_DIR = CMakeFiles/EJ1.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target TP1
+# Link build statements for EXECUTABLE target EJ1
 
 
 #############################################
-# Link the executable TP1
+# Link the executable EJ1
 
-build TP1: CXX_EXECUTABLE_LINKER__TP1_Debug CMakeFiles/TP1.dir/ejercicio1.cpp.o CMakeFiles/TP1.dir/ejercicio2.cpp.o
+build EJ1: CXX_EXECUTABLE_LINKER__EJ1_Debug CMakeFiles/EJ1.dir/ejercicio1.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
-  OBJECT_DIR = CMakeFiles/TP1.dir
+  OBJECT_DIR = CMakeFiles/EJ1.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = TP1
-  TARGET_PDB = TP1.dbg
+  TARGET_FILE = EJ1
+  TARGET_PDB = EJ1.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target EJ2
+
+
+#############################################
+# Order-only phony target for EJ2
+
+build cmake_object_order_depends_target_EJ2: phony || CMakeFiles/EJ2.dir
+
+build CMakeFiles/EJ2.dir/ejercicio2.cpp.o: CXX_COMPILER__EJ2_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/ejercicio2.cpp || cmake_object_order_depends_target_EJ2
+  DEP_FILE = CMakeFiles/EJ2.dir/ejercicio2.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/EJ2.dir
+  OBJECT_FILE_DIR = CMakeFiles/EJ2.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target EJ2
+
+
+#############################################
+# Link the executable EJ2
+
+build EJ2: CXX_EXECUTABLE_LINKER__EJ2_Debug CMakeFiles/EJ2.dir/ejercicio2.cpp.o
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+  OBJECT_DIR = CMakeFiles/EJ2.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = EJ2
+  TARGET_PDB = EJ2.dbg
 
 
 #############################################
@@ -111,7 +136,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /Users/juaniponce/Desktop/DocsJuan/Algoritmos y Estructuras de datos III/TP1/cmake-build-debug
 
-build all: phony TP1
+build all: phony EJ1 EJ2
 
 # =============================================================================
 # Built-in targets
