@@ -51,7 +51,7 @@ build cmake_object_order_depends_target_EJ1: phony || CMakeFiles/EJ1.dir
 
 build CMakeFiles/EJ1.dir/ejercicio1.cpp.o: CXX_COMPILER__EJ1_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/ejercicio1.cpp || cmake_object_order_depends_target_EJ1
   DEP_FILE = CMakeFiles/EJ1.dir/ejercicio1.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++17
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++14
   OBJECT_DIR = CMakeFiles/EJ1.dir
   OBJECT_FILE_DIR = CMakeFiles/EJ1.dir
 
@@ -82,7 +82,7 @@ build cmake_object_order_depends_target_EJ2: phony || CMakeFiles/EJ2.dir
 
 build CMakeFiles/EJ2.dir/ejercicio2.cpp.o: CXX_COMPILER__EJ2_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/ejercicio2.cpp || cmake_object_order_depends_target_EJ2
   DEP_FILE = CMakeFiles/EJ2.dir/ejercicio2.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++17
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++14
   OBJECT_DIR = CMakeFiles/EJ2.dir
   OBJECT_FILE_DIR = CMakeFiles/EJ2.dir
 
@@ -113,7 +113,7 @@ build cmake_object_order_depends_target_EJ3: phony || CMakeFiles/EJ3.dir
 
 build CMakeFiles/EJ3.dir/ejercicio3.cpp.o: CXX_COMPILER__EJ3_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/ejercicio3.cpp || cmake_object_order_depends_target_EJ3
   DEP_FILE = CMakeFiles/EJ3.dir/ejercicio3.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++17
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++14
   OBJECT_DIR = CMakeFiles/EJ3.dir
   OBJECT_FILE_DIR = CMakeFiles/EJ3.dir
 
