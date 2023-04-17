@@ -102,6 +102,37 @@ build EJ2: CXX_EXECUTABLE_LINKER__EJ2_Debug CMakeFiles/EJ2.dir/ejercicio2.cpp.o
   TARGET_FILE = EJ2
   TARGET_PDB = EJ2.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target EJ3
+
+
+#############################################
+# Order-only phony target for EJ3
+
+build cmake_object_order_depends_target_EJ3: phony || CMakeFiles/EJ3.dir
+
+build CMakeFiles/EJ3.dir/ejercicio3.cpp.o: CXX_COMPILER__EJ3_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/ejercicio3.cpp || cmake_object_order_depends_target_EJ3
+  DEP_FILE = CMakeFiles/EJ3.dir/ejercicio3.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/EJ3.dir
+  OBJECT_FILE_DIR = CMakeFiles/EJ3.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target EJ3
+
+
+#############################################
+# Link the executable EJ3
+
+build EJ3: CXX_EXECUTABLE_LINKER__EJ3_Debug CMakeFiles/EJ3.dir/ejercicio3.cpp.o
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+  OBJECT_DIR = CMakeFiles/EJ3.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = EJ3
+  TARGET_PDB = EJ3.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -136,7 +167,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /Users/juaniponce/Desktop/DocsJuan/Algoritmos y Estructuras de datos III/TP1/cmake-build-debug
 
-build all: phony EJ1 EJ2
+build all: phony EJ1 EJ2 EJ3
 
 # =============================================================================
 # Built-in targets
