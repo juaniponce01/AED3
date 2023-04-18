@@ -133,6 +133,37 @@ build EJ3: CXX_EXECUTABLE_LINKER__EJ3_Debug CMakeFiles/EJ3.dir/ejercicio3.cpp.o
   TARGET_FILE = EJ3
   TARGET_PDB = EJ3.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target Tests
+
+
+#############################################
+# Order-only phony target for Tests
+
+build cmake_object_order_depends_target_Tests: phony || CMakeFiles/Tests.dir
+
+build CMakeFiles/Tests.dir/tests.cpp.o: CXX_COMPILER__Tests_Debug /Users/juaniponce/Desktop/DocsJuan/Algoritmos$ y$ Estructuras$ de$ datos$ III/TP1/tests.cpp || cmake_object_order_depends_target_Tests
+  DEP_FILE = CMakeFiles/Tests.dir/tests.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -fcolor-diagnostics -std=gnu++14
+  OBJECT_DIR = CMakeFiles/Tests.dir
+  OBJECT_FILE_DIR = CMakeFiles/Tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Tests
+
+
+#############################################
+# Link the executable Tests
+
+build Tests: CXX_EXECUTABLE_LINKER__Tests_Debug CMakeFiles/Tests.dir/tests.cpp.o
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+  OBJECT_DIR = CMakeFiles/Tests.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Tests
+  TARGET_PDB = Tests.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -167,7 +198,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /Users/juaniponce/Desktop/DocsJuan/Algoritmos y Estructuras de datos III/TP1/cmake-build-debug
 
-build all: phony EJ1 EJ2 EJ3
+build all: phony EJ1 EJ2 EJ3 Tests
 
 # =============================================================================
 # Built-in targets

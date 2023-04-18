@@ -1,16 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <tuple>
-
-using namespace std;
-
-int N;
-vector<tuple<int, int, int>> A;
-vector<int> indices;
+#include "funciones.h"
 
 int findMax(vector<tuple<int, int, int>>& A){
     int max = 0;
-    for (int i = 0; i < N; i++){
+    for (int i = 0; i < A.size(); i++){
         if (get<1>(A[i]) > max){
             max = get<1>(A[i]);
         }
@@ -47,24 +39,4 @@ int cantidadMaximaActividades(vector<tuple<int, int, int>>& A){
         }
     }
     return max;
-}
-
-int main(){
-    cout << "Ejercicio Algoritmo Goloso: Actividades" << endl;
-    cin >> N;
-    A.resize(N);
-    for (int i = 0; i < N; i++){
-        cin >> get<0>(A[i]) >> get<1>(A[i]);
-        get<2>(A[i]) = i+1;
-    }
-//    for (int i = 0; i < N; i++){
-//        cout << "(" << get<0>(A[i]) << ", " << get<1>(A[i]) << ") ";
-//    }
-//    cout << endl;
-    cout << cantidadMaximaActividades(A) << endl;
-    for (int i = 0; i < indices.size(); i++){
-        cout << indices[i] << " ";
-    }
-
-    return 0;
 }
