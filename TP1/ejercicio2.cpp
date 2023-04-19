@@ -4,8 +4,6 @@
 
 using namespace std;
 long long N, divisor, resto; // parametros de entrada
-//bool suma, mult, expo, res; // suma, multiplicacion, exponenciacion, resta
-bool corta = false;
 vector<vector<int>> DP; // resto x N
 vector<long long> v; // vector de numeros
 
@@ -13,8 +11,8 @@ long long mod(long long a, long long b){
     return (b + (a % b)) % b;
 }
 
-long long a;
 long long expBS(long long b, long long e){
+    long long a;
     if (e == 0){
         return 1;
     } else {
@@ -28,29 +26,21 @@ long long expBS(long long b, long long e){
     }
 }
 
-//bool operadores(long long i, long long t){
-//    bool suma, mult, expo, res; // suma, multiplicacion, exponenciacion, resta
-//    if (DP[i][t] != -1) {
-//        if (DP[i][t]==1){
-//            corta = true;
-//        }
-//    } else {
-//        if (corta){
-//            DP[i][t] = 1;
-//            return true;
-//        }
-//
-//        suma = operadores(i+1, (t % divisor + v[i] % divisor) % divisor);
-//        mult = operadores(i+1, (t % divisor * v[i] % divisor) % divisor);
-//        expo = operadores(i+1, expBS(t % divisor, v[i] % divisor));
-//        res = operadores(i+1, mod((t % divisor) - (v[i] % divisor), divisor));
-//
-//        DP[i][t] = (suma || mult || expo || res);
-//    }
-//    return DP[i][t];
-//}
+bool operadores(long long i, long long t){
+    /*
+     Devuelve true si existe una combinacion de operadores que, a partir del i-esimo
+     elemento del vector v, permita obtener el resto t con modulo divisor.
+     */
+    if (DP[i][t] == -1) {
+        DP[i][t] = (operadores(i+1, (t % divisor + v[i] % divisor) % divisor) ||
+                    operadores(i+1, (t % divisor * v[i] % divisor) % divisor) ||
+                    operadores(i+1, expBS(t % divisor, v[i] % divisor)) ||
+                    operadores(i+1, mod((t % divisor) - (v[i] % divisor), divisor)));
+    }
+    return DP[i][t];
+}
 
-bool operadoresBU(long long i, long long t){  // bottom up
+bool operadoresBU(int i, long long t){  // bottom up
     bool suma, mult, expo, res; // suma, multiplicacion, exponenciacion, resta
     for (int j = i-1; j >= 0; j--){
         suma = DP[j+1][mod((t % divisor) - (v[j] % divisor), divisor)];
@@ -59,50 +49,41 @@ bool operadoresBU(long long i, long long t){  // bottom up
         res = DP[j+1][(t % divisor + v[j] % divisor) % divisor];
         DP[j][t] = (suma || mult || expo || res);
     }
-    return DP[0][0];
-}
-
-bool operadores2(long long i, long long t){
-    if (DP[i][t] == -1) {
-        DP[i][t] = (operadores2(i+1, (t % divisor + v[i] % divisor) % divisor) ||
-                    operadores2(i+1, (t % divisor * v[i] % divisor) % divisor) ||
-                    operadores2(i+1, expBS(t % divisor, v[i] % divisor)) ||
-                    operadores2(i+1, mod((t % divisor) - (v[i] % divisor), divisor)));
-    }
-    return DP[i][t];
+    return DP[1][v[0]];
 }
 
 int main(){
     cout << "Ejercicio Programacion Dinamica: Operadores" << endl;
     int casos;
     cin >> casos;
-    vector<bool> existe(casos, false);
-    vector<double> tiempos(casos, 0);
+
+    vector<bool> resultados(casos, false); // guarda los resultados de cada caso
+    vector<double> tiempos(casos, 0); // guarda los tiempos de cada caso
+
     for (int i = 0; i < casos; i++){
         cin >> N >> resto >> divisor;
-        unsigned t0, t1;
-        v.resize(N);
-        corta = false;
 
+        v.resize(N);
         for (int j = 0; j < N; j++){
             cin >> v[j];
         }
 
-        DP.clear();
+        DP.clear(); // borra la matriz DP del caso anterior para reiniciar todos los valores
         DP.resize(N+1, vector<int>(divisor, -1));
 
-        for (int j = 0; j < divisor; j++) {
+        for (int j = 0; j < divisor; j++) {  // inicializo los casos base de la matriz DP
             DP[N][j] = resto == j;
         }
 
+        unsigned t0, t1;
         t0 = clock();
-        existe[i] = operadores2(0, 0);
+        resultados[i] = operadores(1, v[0]);
         t1 = clock();
 
         double time = (double(t1-t0)/CLOCKS_PER_SEC);
         tiempos[i] = time;
     }
-    for (bool caso:existe){
+    for (bool caso:resultados){
         if (caso){
             cout<<"Si"<<endl;
         }else{
