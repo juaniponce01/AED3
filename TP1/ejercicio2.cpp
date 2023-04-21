@@ -40,20 +40,7 @@ bool operadores(long long i, long long t){
     return DP[i][t];
 }
 
-bool operadoresBU(int i, long long t){  // bottom up
-    bool suma, mult, expo, res; // suma, multiplicacion, exponenciacion, resta
-    for (int j = i-1; j >= 0; j--){
-        suma = DP[j+1][mod((t % divisor) - (v[j] % divisor), divisor)];
-        mult = DP[j+1][(t % divisor) / (v[j] % divisor) % divisor];
-        expo = DP[j+1][expBS(t % divisor, v[j] % divisor)];
-        res = DP[j+1][(t % divisor + v[j] % divisor) % divisor];
-        DP[j][t] = (suma || mult || expo || res);
-    }
-    return DP[1][v[0]];
-}
-
 int main(){
-    cout << "Ejercicio Programacion Dinamica: Operadores" << endl;
     int casos;
     cin >> casos;
 

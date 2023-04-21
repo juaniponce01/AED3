@@ -1,15 +1,13 @@
 #include "funciones.h"
 
-
-
 // ------------------------ Funciones Ejercicio 2 ------------------------
 
 long long mod(long long a, long long b){
     return (b + (a % b)) % b;
 }
 
+long long a;
 long long expBS(long long b, long long e){
-    long long a;
     if (e == 0){
         return 1;
     } else {
@@ -41,9 +39,9 @@ bool operadores(long long i, long long t){
 
 int findMax(vector<tuple<int, int, int>>& A){
     int max = 0;
-    for (auto & i : A){
-        if (get<1>(i) > max){
-            max = get<1>(i);
+    for (auto & act : A){
+        if (get<1>(act) > max){
+            max = get<1>(act);
         }
     }
     return max;
@@ -63,21 +61,6 @@ void bucketSort(vector<tuple<int, int, int>>& A){
             k++;
         }
     }
-}
-
-int cantidadMaximaActividades(vector<tuple<int, int, int>>& A){
-    bucketSort(A);
-    int max = 0, ultima = get<1>(A[0]);
-    indices.push_back(get<2>(A[0]));
-    max++;
-    for (int i = 1; i < A.size(); i++){
-        if (get<0>(A[i]) >= ultima){
-            indices.push_back(get<2>(A[i]));
-            max++;
-            ultima = get<1>(A[i]);
-        }
-    }
-    return max;
 }
 
 vector<tuple<int, int, int>> subconjuntoMaximoActividades(vector<tuple<int, int, int>>& A){

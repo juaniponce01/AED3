@@ -33,8 +33,6 @@ int findMax(vector<tuple<int, int, int>>& A);
 
 void bucketSort(vector<tuple<int, int, int>>& A);
 
-int cantidadMaximaActividades(vector<tuple<int, int, int>>& A);
-
 vector<tuple<int, int, int>> subconjuntoMaximoActividades(vector<tuple<int, int, int>>& A);
 
 

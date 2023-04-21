@@ -87,7 +87,6 @@ void cuadradoMagicoK(vector<vector<int>>& C, int i, int j){
 }
 
 int main(){
-    cout << "Ejercicio Backtracking: Orden lexicografico de cuadrados magicos" << endl;
     cin >> N >> K;
     unsigned t0, t1;
     // inicializo el vector de elementos usados
@@ -115,13 +114,13 @@ int main(){
     if (cuadradoK.empty()){
         cout << -1 << endl;
     }
-    for (auto row : cuadradoK){
-        for (auto element : row){
-            cout << element << " ";
+    for (auto & row : cuadradoK){
+        for (auto & elem : row){
+            cout << elem << " ";
         }
         cout << endl;
     }
-     cout << "Execution Time: " << time << " seg" << endl;
+//     cout << "Execution Time: " << time << " seg" << endl;
 
 
     return 0;
