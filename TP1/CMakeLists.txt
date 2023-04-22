@@ -7,4 +7,5 @@ add_executable(EJ1 ejercicio1.cpp)
 add_executable(EJ2 ejercicio2.cpp)
 add_executable(EJ3 ejercicio3.cpp)
 add_executable(Tests tests.cpp)
+add_executable(EXP experimentacion.cpp)
 

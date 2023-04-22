@@ -2,7 +2,6 @@
 #define TP1_FUNCIONES_H
 
 #include <iostream>
-#include <iostream>
 #include <vector>
 #include <tuple>
 #include <ctime>

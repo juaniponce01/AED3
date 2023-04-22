@@ -55,28 +55,18 @@ def cantidadMaximaActividades(x):
 			ultima = i[1]
 	return max_
 
-def actividades(lenght):
+def generarInputRandom(size):
   #Crea un array de actividades con longitud lenght 
-	arr = []
-	global indices
-	for i in range(lenght):
-		y = random.randint(0, 1000)
-		x = random.randint(0, y)
-		arr = arr + [(x, y, i+1)]
-	bucketSort(arr)
-	indices = indices + [arr[0][2]]
-	m = cantidadMaximaActividades(arr)
-
+	with open('../inputs/input_' + str(size) + '.csv', 'w') as f: 
+		for i in range(size):
+			y = random.randint(1, 2*size)
+			x = random.randint(0, y)
+			f.write(str(x) + " " + str(y) + "\n")
 
 def main():
 	df = pd.DataFrame(columns=['longitud', 'tiempo'])
-	for i in range(1, 10000, 500):
-		start_time = time.time()
-		actividades(i)
-		new_row = {'longitud': i, 'tiempo':(time.time() - start_time)}
-		df.loc[len(df)] = new_row
-		
-	df.plot(x='longitud', y='tiempo')
-	plt.show()
+	for i in range(500, 10001, 500):
+		generarInputRandom(i)
 
 main()
+print("Los input fueron generados correctamente")
