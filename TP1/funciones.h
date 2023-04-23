@@ -11,7 +11,7 @@
 using namespace std;
 
 
-// Funciones y variables del ejercicio 1
+// Funciones y variables del ejercicio 2
 
 long long N, divisor, resto; // parametros de entrada
 vector<vector<int>> DP; // resto x N
@@ -25,8 +25,6 @@ bool operadores(long long i, long long t);
 
 
 // Funciones y variables del ejercicio 3
-
-vector<int> indices;
 
 int findMax(vector<tuple<int, int, int>>& A);
 
