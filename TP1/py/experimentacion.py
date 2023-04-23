@@ -1,7 +1,7 @@
 import random
 
 def generarInputRandom(size):
-  #Crea un array de actividades con longitud size 
+  #Crea un array de actividades randomizadas con longitud size 
 	with open('../inputs/random_' + str(size) + '.csv', 'w') as f: 
 		for i in range(size):
 			y = random.randint(1, 2*size)
@@ -9,7 +9,7 @@ def generarInputRandom(size):
 			f.write(str(x) + " " + str(y) + "\n")
    
 def generarInputPeorCaso(size):
-  #Crea un array de actividades con longitud size 
+  #Crea un array de actividades no solapadas con longitud size 
   with open('../inputs/peorCaso_' + str(size) + '.csv', 'w') as f: 
     for i in range(size):
       y = 2*size - i
@@ -17,7 +17,7 @@ def generarInputPeorCaso(size):
       f.write(str(x) + " " + str(y) + "\n")
       
 def generarInputMejorCaso(size):
-  #Crea un array de actividades con longitud size 
+  #Crea un array de actividades solaadas con longitud size 
   with open('../inputs/mejorCaso_' + str(size) + '.csv', 'w') as f: 
     x = 0
     for i in range(1, size+1):

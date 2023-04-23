@@ -106,11 +106,8 @@ int main(){
     // calculo el numero magico
     numero_magico = (N*N*N + N)/2;
 
-    t0 = clock();
     cuadradoMagicoK(M, 0, 0);
-    t1 = clock();
 
-    double time = (double(t1-t0)/CLOCKS_PER_SEC);
     if (cuadradoK.empty()){
         cout << -1 << endl;
     }
@@ -120,8 +117,6 @@ int main(){
         }
         cout << endl;
     }
-//     cout << "Execution Time: " << time << " seg" << endl;
-
 
     return 0;
 }

@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
-#include <ctime>
 #include <tuple>
 
 using namespace std;
 
 int findMax(vector<tuple<int, int, int>>& A){
+    // encuentra el maximo valor de la segunda componente de la tupla
     int max = 0;
     for (auto & act : A){
         if (get<1>(act) > max){
@@ -32,6 +32,7 @@ void bucketSort(vector<tuple<int, int, int>>& A){
 }
 
 vector<tuple<int, int, int>> subconjuntoMaximoActividades(vector<tuple<int, int, int>>& A){
+    // Devuelve un vector de tuplas con las actividades que maximizan la cantidad de actividades
     bucketSort(A);
     vector<tuple<int, int, int>> S = {A[0]};
     int ultima = get<1>(A[0]);
@@ -48,24 +49,18 @@ int main(){
     int N;
     cin >> N;
 
-    unsigned t0, t1;
-
     vector<tuple<int, int, int>> A(N);
     for (int i = 0; i < N; i++){
         cin >> get<0>(A[i]) >> get<1>(A[i]);
         get<2>(A[i]) = i+1;
     }
-    t0 = clock();
+
     vector<tuple<int, int, int>> S = subconjuntoMaximoActividades(A);
-    t1 = clock();
 
     cout << S.size() << endl;
     for (auto & i : S){
         cout << get<2>(i) << " ";
     }
-//    cout << endl;
-    double time = (double(t1-t0)/CLOCKS_PER_SEC);
-//    cout << "Execution Time: " << time << endl;
 
     return 0;
 }
