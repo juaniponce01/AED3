@@ -29,8 +29,10 @@ public:
     [[nodiscard]] int n() const;
     [[nodiscard]] int m() const;
     vector<vector<int>>& ma();
+    vector<vector<int>>& la();
     vector<int> vecinos(int v); //vecinos de v
     unsigned int grado(int v); //cant vecinos de v
+    bool perteneceACiclo(int v); //si v pertenece a un ciclo
 
 private:
     int n_{}; // cantidad de vertices
@@ -38,6 +40,7 @@ private:
     vector<pair<int, int>> aristas_; //aristas del grafo
     vector<vector<int>> la_; //lista de adyacencia
     vector<vector<int>> ma_; //matriz de adyacencia
+    bool perteneceACicloAux(int u, int v, vector<bool> visitados, int anterior); //funcion auxiliar para perteneceACiclo
 
 };
 

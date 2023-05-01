@@ -1,0 +1,8 @@
+for v: #O(n)
+    for w en N(v): #O(m)
+        marcar w
+    for arista en E(G): #O(m)
+        if arista[1] y arista[2] marcadas:
+            return true
+
+# Complejidad: O(n*2m) = O(n*m)
