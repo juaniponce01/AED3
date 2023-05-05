@@ -1,7 +1,5 @@
 #include "grafo.h"
 
-#include <utility>
-
 Grafo::Grafo(const string& test_path) {
     // TODO
 };

@@ -1,8 +1,6 @@
 #include "grafo.h"
 #include <iomanip>
 
-
-
 double comb(int n, int k){
     if(k==0 || k==n){
         return 1;
@@ -30,7 +28,7 @@ int main() {
     for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        aristas.push_back(make_pair(u, v));
+        aristas.emplace_back(u, v);
     }
 
     Grafo grafo(n, m, aristas);
