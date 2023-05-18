@@ -3,5 +3,5 @@ project(TP2)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(EJ1 ejercicio1.cpp grafo.h grafo.cpp)
+add_executable(EJ1 ejercicio1copia.cpp)
 add_executable(TEST1 test1.cpp)
