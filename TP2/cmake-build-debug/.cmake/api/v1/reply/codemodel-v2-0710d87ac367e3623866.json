@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.25"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "TP2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "EJ1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-EJ1-Debug-8e0526bb624fa3e4f508.json",
+					"name" : "EJ1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "EJ2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-EJ2-Debug-91ed81a7bd90b09bc035.json",
+					"name" : "EJ2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "EJ3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-EJ3-Debug-ece7adf61fee753d7a96.json",
+					"name" : "EJ3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TEST1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TEST1-Debug-3a670da3eb356e562351.json",
+					"name" : "TEST1",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/juaniponce/AED3/TP2/cmake-build-debug",
+		"source" : "/home/juaniponce/AED3/TP2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
