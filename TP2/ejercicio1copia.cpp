@@ -2,22 +2,22 @@
 #include <vector>
 #include <iomanip>
 
-int NO_LO_VI = 0;
-int EMPECE_A_VER = 1;
-int TERMINE_DE_VER = 2;
+long long NO_LO_VI = 0;
+long long EMPECE_A_VER = 1;
+long long TERMINE_DE_VER = 2;
 
 using namespace std;
 
-int n, m;
-vector<vector<int>> aristas;
-vector<int> estado; // estados de los nodos en el grafo
+long long n, m;
+vector<vector<long long>> aristas;
+vector<long long> estado; // estados de los nodos en el grafo
 vector<bool> visitado; // visitados en el arbol
-vector<int> backConExtremoInferiorEn;
-vector<int> backConExtremoSuperiorEn;
-vector<int> pred;
-vector<vector<int>> treeEdges;
-vector<int> memo; // cantidad de backedges que cubren el nodo
-vector<int> cantidadNodosPorCC;
+vector<long long> backConExtremoInferiorEn;
+vector<long long> backConExtremoSuperiorEn;
+vector<long long> pred;
+vector<vector<long long>> treeEdges;
+vector<long long> memo; // cantidad de backedges que cubren el nodo
+vector<long long> cantidadNodosPorCC;
 
 /*
  * 1) busco los puentes
@@ -27,9 +27,9 @@ vector<int> cantidadNodosPorCC;
  */
 
 
-void dfs(int v, int p = -1) { // p es el padre de v
+void dfs(long long v, long long p = -1) { // p es el padre de v
     estado[v] = EMPECE_A_VER;
-    for (int u : aristas[v]) {
+    for (long long u : aristas[v]) {
         if (estado[u] == NO_LO_VI) {
             treeEdges[v].push_back(u);
             pred[u] = v;
@@ -42,12 +42,12 @@ void dfs(int v, int p = -1) { // p es el padre de v
     estado[v] = TERMINE_DE_VER;
 }
 
-int cubren(int v, int p = -1) { // cantidad de backedges que cubren la arista del nodo v y su padre p
+long long cubren(long long v, long long p = -1) { // cantidad de backedges que cubren la arista del nodo v y su padre p
     if (memo[v] != -1) return memo[v];
-    int res = 0;
+    long long res = 0;
     res += backConExtremoInferiorEn[v];
     res -= backConExtremoSuperiorEn[v];
-    for (int hijo : treeEdges[v]) {
+    for (long long hijo : treeEdges[v]) {
         if (hijo != p) {
             res += cubren(hijo, v);
         }
@@ -56,12 +56,12 @@ int cubren(int v, int p = -1) { // cantidad de backedges que cubren la arista de
     return res;
 }
 
-void dfsCantidadNodos(int v, int p = -1, int cc = 0) {
+void dfsCantidadNodos(long long v, long long p = -1, long long cc = 0) {
     /*
      * Calcula
     */
     visitado[v] = true;
-    for (int u : treeEdges[v]) {
+    for (long long u : treeEdges[v]) {
         if (cubren(u, v) == 0) { // si (u, v) es puente
             cantidadNodosPorCC.push_back(1);
             dfsCantidadNodos(u, v, cc+1);
@@ -76,13 +76,13 @@ void cantidadNodosPorComponenteConexa() {
     /*
      * Calcula cantidad de nodos por componente conexa
     */
-    for (int i = 0; i < n; i++) {
+    for (long long i = 0; i < n; i++) {
         if (estado[i] == NO_LO_VI) {
             dfs(i);
         }
     }
     cantidadNodosPorCC.push_back(1);
-    for (int i = 0; i < n; i++) {
+    for (long long i = 0; i < n; i++) {
         if (visitado[i] == NO_LO_VI) {
             dfsCantidadNodos(i);
         }
@@ -91,7 +91,7 @@ void cantidadNodosPorComponenteConexa() {
 
 float probabilidadDePerder(){
     double posiblesGanadas = 0;
-    for (int & i : cantidadNodosPorCC) {
+    for (long long & i : cantidadNodosPorCC) {
         posiblesGanadas += (double)(i*(i-1)) / 2;
     }
     double posiblesJugadas = (double)(n*(n-1)) / 2;
@@ -111,8 +111,8 @@ int main() {
     treeEdges.resize(n+1);
     memo.resize(n+1, -1);
 
-    for (int i = 0; i < m; i++) {
-        int u, v;
+    for (long long i = 0; i < m; i++) {
+        long long u, v;
         cin >> u >> v;
         aristas[u].push_back(v);
         aristas[v].push_back(u);
