@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <string>
 #include <iomanip>
 
 int NO_LO_VI = 0;
@@ -11,13 +10,14 @@ using namespace std;
 
 int n, m;
 vector<vector<int>> aristas;
-vector<int> estado;
-vector<bool> visitado;
+vector<int> estado; // estados de los nodos en el grafo
+vector<bool> visitado; // visitados en el arbol
 vector<int> backConExtremoInferiorEn;
 vector<int> backConExtremoSuperiorEn;
 vector<int> pred;
 vector<vector<int>> treeEdges;
 vector<int> memo; // cantidad de backedges que cubren el nodo
+vector<int> cantidadNodosPorCC;
 
 /*
  * 1) busco los puentes
@@ -34,7 +34,7 @@ void dfs(int v, int p = -1) { // p es el padre de v
             treeEdges[v].push_back(u);
             pred[u] = v;
             dfs(u, v);
-        } else if (u != p && estado[u] == EMPECE_A_VER) {
+        } else if (u != p && estado[u] == EMPECE_A_VER) { // backedge
             backConExtremoInferiorEn[v]++;
             backConExtremoSuperiorEn[u]++;
         }
@@ -56,65 +56,69 @@ int cubren(int v, int p = -1) { // cantidad de backedges que cubren la arista de
     return res;
 }
 
-int dfsCantidadNodos(int v, int p = -1, int res = 0) {
+void dfsCantidadNodos(int v, int p = -1, int cc = 0) {
+    /*
+     * Calcula
+    */
     visitado[v] = true;
-    for (int u : aristas[v]) {
-        if (u != p && !visitado[u]) {
-            res = 1 + dfsCantidadNodos(u, v);
+    for (int u : treeEdges[v]) {
+        if (cubren(u, v) == 0) { // si (u, v) es puente
+            cantidadNodosPorCC.push_back(1);
+            dfsCantidadNodos(u, v, cc+1);
+        } else {
+            cantidadNodosPorCC[cc]++;
+            dfsCantidadNodos(u, v, cc);
         }
     }
-    return res;
 }
 
-void cantidadNodosPorComponenteConexa(vector<int>& res) {
+void cantidadNodosPorComponenteConexa() {
+    /*
+     * Calcula cantidad de nodos por componente conexa
+    */
     for (int i = 0; i < n; i++) {
         if (estado[i] == NO_LO_VI) {
             dfs(i);
         }
     }
-    int cant_nodos = 0;
+    cantidadNodosPorCC.push_back(1);
     for (int i = 0; i < n; i++) {
-
-        // TODO: tengo que lograr que cuente los nodos que estan en una comp conexa
-        // lo que pasa ahora es que existe una componente conexa que no contamos por no entrar al if
-
-        if (cubren(i) == 0) {
-            cant_nodos = 1 + dfsCantidadNodos(i, pred[i]);
-            res.push_back(cant_nodos);
-            cant_nodos = 0;
+        if (visitado[i] == NO_LO_VI) {
+            dfsCantidadNodos(i);
         }
     }
 }
 
-double probabilidadDePerder(){
-    vector<int> nodosEnCC;
-    cantidadNodosPorComponenteConexa(nodosEnCC);
+float probabilidadDePerder(){
     double posiblesGanadas = 0;
-    for (int & i : nodosEnCC) {
+    for (int & i : cantidadNodosPorCC) {
         posiblesGanadas += (double)(i*(i-1)) / 2;
     }
     double posiblesJugadas = (double)(n*(n-1)) / 2;
-    return 1 - posiblesGanadas/posiblesJugadas;
+    return (float)(1 - (posiblesGanadas*1.0)/posiblesJugadas);
 }
 
 
 int main() {
     cin >> n >> m;
 
-    aristas.resize(n);
-    estado.resize(n, NO_LO_VI);
-    visitado.resize(n, false);
-    backConExtremoInferiorEn.resize(n, 0);
-    backConExtremoSuperiorEn.resize(n, 0);
-    pred.resize(n, -1);
-    treeEdges.resize(n);
-    memo.resize(n, -1);
+    aristas.resize(n+1);
+    estado.resize(n+1, NO_LO_VI);
+    visitado.resize(n+1, false);
+    backConExtremoInferiorEn.resize(n+1, 0);
+    backConExtremoSuperiorEn.resize(n+1, 0);
+    pred.resize(n+1, -1);
+    treeEdges.resize(n+1);
+    memo.resize(n+1, -1);
 
     for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        aristas.at(u-1).push_back(v);
+        aristas[u].push_back(v);
+        aristas[v].push_back(u);
     }
+
+    cantidadNodosPorComponenteConexa();
 
     cout << fixed << setprecision(5) << probabilidadDePerder() << endl;
 

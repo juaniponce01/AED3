@@ -1,8 +1,12 @@
 #include "grafo.h"
 #include <iomanip>
 
+
+
 double comb(int n, int k){
-    if(k==0 || k==n){
+    if (k > n){
+        return 0;
+    } else if(k==0 || k==n) {
         return 1;
     } else {
         return comb(n-1,k-1) + comb(n-1,k);
@@ -10,13 +14,25 @@ double comb(int n, int k){
 }
 
 double probabilidadPerder(Grafo G){
-    int cantVerticesEnCiclo = 0;
-    for (int i = 1; i <= G.n(); i++) {
-        if (G.perteneceACiclo(i)) {
-            cantVerticesEnCiclo++;
-        }
+//    int cantVerticesEnCiclo = 0;
+//    for (int i = 1; i <= G.n(); i++) {
+//        if (G.perteneceACiclo(i)) {
+//            cantVerticesEnCiclo++;
+//        }
+//    }
+//    return 1 - comb(cantVerticesEnCiclo, 2) / comb(G.n(), 2);
+    vector<int> ciclos = G.cantidadDeVerticesPorCiclo();
+    cout << "Ciclos: ";
+    for (int ciclo : ciclos) {
+        cout << ciclo << " ";
     }
-    return 1 - comb(cantVerticesEnCiclo, 2) / comb(G.n(), 2);
+    cout << endl;
+    int cantVerticesEnCiclo = 0;
+    double probabilidadGanar = 0;
+    for (int ciclo : ciclos) {
+        probabilidadGanar += comb(ciclo, 2);
+    }
+    return 1 - probabilidadGanar / comb(G.n(), 2);
 }
 
 
@@ -28,7 +44,7 @@ int main() {
     for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        aristas.emplace_back(u, v);
+        aristas.push_back(make_pair(u, v));
     }
 
     Grafo grafo(n, m, aristas);
