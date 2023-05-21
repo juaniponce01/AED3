@@ -49,8 +49,8 @@ cmake_ninja_workdir = /home/juaniponce/AED3/TP2/cmake-build-debug/
 
 build cmake_object_order_depends_target_EJ1: phony || CMakeFiles/EJ1.dir
 
-build CMakeFiles/EJ1.dir/ejercicio1copia.cpp.o: CXX_COMPILER__EJ1_Debug /home/juaniponce/AED3/TP2/ejercicio1copia.cpp || cmake_object_order_depends_target_EJ1
-  DEP_FILE = CMakeFiles/EJ1.dir/ejercicio1copia.cpp.o.d
+build CMakeFiles/EJ1.dir/ejercicio1.cpp.o: CXX_COMPILER__EJ1_Debug /home/juaniponce/AED3/TP2/ejercicio1.cpp || cmake_object_order_depends_target_EJ1
+  DEP_FILE = CMakeFiles/EJ1.dir/ejercicio1.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/EJ1.dir
   OBJECT_FILE_DIR = CMakeFiles/EJ1.dir
@@ -63,7 +63,7 @@ build CMakeFiles/EJ1.dir/ejercicio1copia.cpp.o: CXX_COMPILER__EJ1_Debug /home/ju
 #############################################
 # Link the executable EJ1
 
-build EJ1: CXX_EXECUTABLE_LINKER__EJ1_Debug CMakeFiles/EJ1.dir/ejercicio1copia.cpp.o
+build EJ1: CXX_EXECUTABLE_LINKER__EJ1_Debug CMakeFiles/EJ1.dir/ejercicio1.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/EJ1.dir
   POST_BUILD = :
