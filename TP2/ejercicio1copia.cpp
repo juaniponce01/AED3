@@ -76,13 +76,13 @@ void cantidadNodosPorComponenteConexa() {
     /*
      * Calcula cantidad de nodos por componente conexa
     */
-    for (long long i = 0; i < n; i++) {
+    for (long long i = 1; i <= n; i++) {
         if (estado[i] == NO_LO_VI) {
             dfs(i);
         }
     }
     cantidadNodosPorCC.push_back(1);
-    for (long long i = 0; i < n; i++) {
+    for (long long i = 1; i <= n; i++) {
         if (visitado[i] == NO_LO_VI) {
             dfsCantidadNodos(i);
         }
