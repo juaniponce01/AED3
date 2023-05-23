@@ -19,8 +19,7 @@ vector<pair<float, float>> result;
  */
 vector<vector<pair<int, int>>> aristas;
 vector<pair<int, int>> oficinas;
-vector<vector<pair<int, int>>> agm;
-vector<tuple<int, int, int>> E;
+vector<tuple<float, int, int>> E;
 
 struct DSU{
     void resize(int n){
@@ -73,16 +72,11 @@ bool puedoCable(pair<int, int> a, pair<int, int> b){
 void completarGrafo(){
     for (int i = 1; i <= n; i++){
         for (int j = i+1; j <= n; j++){
-            if (puedoCable(oficinas[i], oficinas[j])){
-                // usar UTP
-                aristas[i].emplace_back(j, U);
-                aristas[j].emplace_back(i, U);
-                E.emplace_back(U, i, j);
-            } else {
-                // usar fibra optica
-                aristas[i].emplace_back(j, V);
-                aristas[j].emplace_back(i, V);
-                E.emplace_back(V, i, j);
+            float peso;
+            if (puedoCable(oficinas[i], oficinas[j])){ // usar UTP
+                peso = (float)U * distancia(oficinas[i], oficinas[j]);
+            } else { // usar fibra optica
+                peso = (float)V * distancia(oficinas[i], oficinas[j]);
             }
         }
     }
@@ -94,22 +88,19 @@ void kruskal(){
     dsu.clear();
     dsu.resize(n);
     for(auto arista : E){
-        int p = get<0>(arista); // Peso
+        float p = get<0>(arista); // Peso
         int v = get<1>(arista); // Vertice 1
         int u = get<2>(arista); // Vertice 2
         //si (u,v) es arista segura
         if(dsu.find(v) != dsu.find(u)){
             // agregar
             dsu.unite(u,v);
-            agm[v].emplace_back(u, p);
-            agm[u].emplace_back(v, p);
             cant_aristas++;
             if (p == U) {
                 res_UTP += (float)p * distancia(oficinas[v], oficinas[u]);
             } else {
-                res_FO += (float)V * distancia(oficinas[v], oficinas[u]);
+                res_FO += p;
             }
-            if (cant_aristas == n-W) break;
         }
         if (cant_aristas == n-W) break;
     }
@@ -122,12 +113,8 @@ int main(){
         cin >> n >> R >> W >> U >> V;
 
         res_UTP = 0, res_FO = 0;
-        aristas.clear();
-        agm.clear();
         E.clear();
         oficinas.resize(n+1);
-        aristas.resize(n+1);
-        agm.resize(n+1);
 
         for (int j = 1; j <= n; j++){
             int x, y;
