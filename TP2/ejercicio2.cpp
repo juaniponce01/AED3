@@ -9,6 +9,8 @@ long long EMPECE_A_VER = 1;
 long long TERMINE_DE_VER = 2;
 
 using namespace std;
+
+//================= IDEA ================================
 /*
  * 1) encontrar todos los componentes fuertemente conexos
  * 2) armar el grafo de cfcs
@@ -84,7 +86,7 @@ int main(){
     estado.clear();
     estado.resize(n+1, NO_LO_VI);
 
-    //vacio el stack, haciendo dfsCFC por los nodos que no visite
+    //vacio el stack, haciendo dfsCFCs por los nodos que no visite
     while (!S.empty()) {
         long long v = S.top();
         S.pop();
@@ -93,19 +95,19 @@ int main(){
             minimos.push_back(v);
             gradoINcero.push_back(true);
             dfsCFCs(v);
+            F++;
         }
-        F++;
     }
 
     vector<long long> result;
 
-    for (long long i = 0; i < cfcs.size(); i++) {
+    for (long long i = F-1; i >= 0; i--) {
         if (gradoINcero[i]) {
             result.push_back(minimos[i]);
         }
     }
 
-    sort(result.begin(), result.end());
+//    sort(result.begin(), result.end());
 
     //Imprimir tamaño de algún conjunto optimo
     cout << result.size() << endl;

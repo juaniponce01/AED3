@@ -133,37 +133,6 @@ build EJ3: CXX_EXECUTABLE_LINKER__EJ3_Debug CMakeFiles/EJ3.dir/ejercicio3.cpp.o
   TARGET_FILE = EJ3
   TARGET_PDB = EJ3.dbg
 
-# =============================================================================
-# Object build statements for EXECUTABLE target TEST1
-
-
-#############################################
-# Order-only phony target for TEST1
-
-build cmake_object_order_depends_target_TEST1: phony || CMakeFiles/TEST1.dir
-
-build CMakeFiles/TEST1.dir/test1.cpp.o: CXX_COMPILER__TEST1_Debug /home/juaniponce/AED3/TP2/test1.cpp || cmake_object_order_depends_target_TEST1
-  DEP_FILE = CMakeFiles/TEST1.dir/test1.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/TEST1.dir
-  OBJECT_FILE_DIR = CMakeFiles/TEST1.dir
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target TEST1
-
-
-#############################################
-# Link the executable TEST1
-
-build TEST1: CXX_EXECUTABLE_LINKER__TEST1_Debug CMakeFiles/TEST1.dir/test1.cpp.o
-  FLAGS = -g
-  OBJECT_DIR = CMakeFiles/TEST1.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = TEST1
-  TARGET_PDB = TEST1.dbg
-
 
 #############################################
 # Utility command for edit_cache
@@ -198,7 +167,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/juaniponce/AED3/TP2/cmake-build-debug
 
-build all: phony EJ1 EJ2 EJ3 TEST1
+build all: phony EJ1 EJ2 EJ3
 
 # =============================================================================
 # Built-in targets

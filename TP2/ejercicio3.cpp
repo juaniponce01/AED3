@@ -20,6 +20,7 @@ vector<pair<float, float>> result;
 vector<vector<pair<int, int>>> aristas;
 vector<pair<int, int>> oficinas;
 vector<tuple<float, int, int>> E;
+vector<tuple<float, int, int>> agm;
 
 struct DSU{
     void resize(int n){
@@ -96,8 +97,9 @@ void kruskal(){
             // agregar
             dsu.unite(u,v);
             cant_aristas++;
-            if (p == U) {
-                res_UTP += (float)p * distancia(oficinas[v], oficinas[u]);
+            agm.push_back(arista);
+            if (puedoCable(oficinas[v], oficinas[u])) {
+                res_UTP += p;
             } else {
                 res_FO += p;
             }
@@ -114,6 +116,7 @@ int main(){
 
         res_UTP = 0, res_FO = 0;
         E.clear();
+        agm.clear();
         oficinas.resize(n+1);
 
         for (int j = 1; j <= n; j++){
@@ -125,6 +128,23 @@ int main(){
         completarGrafo();
 
         kruskal();
+
+//        // sacar las W-1 aristas de mayor peso
+//        for (int j = 0; j < W-1; j++){
+//            agm.pop_back();
+//        }
+//
+//        // calcular el peso total de las n-W+1 aristas
+//        for (auto & arista : agm){
+//            float p = get<0>(arista); // Peso
+//            int v = get<1>(arista); // Vertice 1
+//            int u = get<2>(arista); // Vertice 2
+//            if (puedoCable(oficinas[v], oficinas[u])) {
+//                res_UTP += p;
+//            } else {
+//                res_FO += p;
+//            }
+//        }
 
         result.emplace_back(res_UTP, res_FO);
 

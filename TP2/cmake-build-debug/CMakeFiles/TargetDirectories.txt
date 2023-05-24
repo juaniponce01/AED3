@@ -1,6 +1,5 @@
 /home/juaniponce/AED3/TP2/cmake-build-debug/CMakeFiles/EJ1.dir
 /home/juaniponce/AED3/TP2/cmake-build-debug/CMakeFiles/EJ2.dir
 /home/juaniponce/AED3/TP2/cmake-build-debug/CMakeFiles/EJ3.dir
-/home/juaniponce/AED3/TP2/cmake-build-debug/CMakeFiles/TEST1.dir
 /home/juaniponce/AED3/TP2/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/juaniponce/AED3/TP2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
