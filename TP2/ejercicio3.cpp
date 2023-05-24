@@ -7,8 +7,8 @@
 using namespace std;
 
 int C, n, R, W, U ,V;
-float res_UTP, res_FO;
-vector<pair<float, float>> result;
+double res_UTP, res_FO;
+vector<pair<double, double>> result;
 /*
  * c es Cantidad de Casos
  * N es la cantidad de oficinas
@@ -19,8 +19,8 @@ vector<pair<float, float>> result;
  */
 vector<vector<pair<int, int>>> aristas;
 vector<pair<int, int>> oficinas;
-vector<tuple<float, int, int>> E;
-vector<tuple<float, int, int>> agm;
+vector<tuple<double, int, int>> E;
+vector<tuple<double, int, int>> agm;
 
 struct DSU{
     void resize(int n){
@@ -62,8 +62,8 @@ DSU dsu;
  * 4) calcular el peso total de las w aristas
  */
 
-float distancia(pair<float, float> a, pair<float, float> b){
-    return sqrtf(powf(a.first - b.first, 2) + powf(a.second - b.second, 2));
+double distancia(pair<int, int> a, pair<int, int> b){
+    return sqrt(pow(a.first - b.first, 2) + pow(a.second - b.second, 2));
 }
 
 bool puedoCable(pair<int, int> a, pair<int, int> b){
@@ -73,13 +73,14 @@ bool puedoCable(pair<int, int> a, pair<int, int> b){
 void completarGrafo(){
     for (int i = 1; i <= n; i++){
         for (int j = i+1; j <= n; j++){
-            float peso;
-            float dist = distancia(oficinas[i], oficinas[j]);
-            if (dist <= (float)R){ // usar UTP
-                peso = (float)U * dist;
+            double peso;
+            double dist = distancia(oficinas[i], oficinas[j]);
+            if (dist <= (double)R){ // usar UTP
+                peso = (double)U * dist;
             } else { // usar fibra optica
-                peso = (float)V * dist;
+                peso = (double)V * dist;
             }
+            E.emplace_back(peso, i, j);
         }
     }
 }
@@ -90,7 +91,7 @@ void kruskal(){
     dsu.clear();
     dsu.resize(n);
     for(auto arista : E){
-        float p = get<0>(arista); // Peso
+        double p = get<0>(arista); // Peso
         int v = get<1>(arista); // Vertice 1
         int u = get<2>(arista); // Vertice 2
         //si (u,v) es arista segura
