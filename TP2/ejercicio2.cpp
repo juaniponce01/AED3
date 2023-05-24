@@ -50,7 +50,7 @@ void dfsCFCs(long long v, long long p = -1) { // p es el padre de v
         if (estado[u] == NO_LO_VI) {
             if (u < minimos[F]) minimos[F] = u;
             dfsCFCs(u, v);
-        } else if (estado[u] == TERMINE_DE_VER){
+        } else if (find(cfcs[F].begin(), cfcs[F].end(), u) == cfcs[F].end() && estado[u] == TERMINE_DE_VER){
             gradoINcero[F] = false;
         }
     }

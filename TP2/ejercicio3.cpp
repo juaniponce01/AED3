@@ -74,10 +74,11 @@ void completarGrafo(){
     for (int i = 1; i <= n; i++){
         for (int j = i+1; j <= n; j++){
             float peso;
-            if (puedoCable(oficinas[i], oficinas[j])){ // usar UTP
-                peso = (float)U * distancia(oficinas[i], oficinas[j]);
+            float dist = distancia(oficinas[i], oficinas[j]);
+            if (dist <= (float)R){ // usar UTP
+                peso = (float)U * dist;
             } else { // usar fibra optica
-                peso = (float)V * distancia(oficinas[i], oficinas[j]);
+                peso = (float)V * dist;
             }
         }
     }
