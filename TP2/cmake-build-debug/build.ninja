@@ -133,6 +133,37 @@ build EJ3: CXX_EXECUTABLE_LINKER__EJ3_Debug CMakeFiles/EJ3.dir/ejercicio3.cpp.o
   TARGET_FILE = EJ3
   TARGET_PDB = EJ3.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target EXP
+
+
+#############################################
+# Order-only phony target for EXP
+
+build cmake_object_order_depends_target_EXP: phony || CMakeFiles/EXP.dir
+
+build CMakeFiles/EXP.dir/experimentacion.cpp.o: CXX_COMPILER__EXP_Debug /home/juaniponce/AED3/TP2/experimentacion.cpp || cmake_object_order_depends_target_EXP
+  DEP_FILE = CMakeFiles/EXP.dir/experimentacion.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/EXP.dir
+  OBJECT_FILE_DIR = CMakeFiles/EXP.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target EXP
+
+
+#############################################
+# Link the executable EXP
+
+build EXP: CXX_EXECUTABLE_LINKER__EXP_Debug CMakeFiles/EXP.dir/experimentacion.cpp.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/EXP.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = EXP
+  TARGET_PDB = EXP.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -167,7 +198,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/juaniponce/AED3/TP2/cmake-build-debug
 
-build all: phony EJ1 EJ2 EJ3
+build all: phony EJ1 EJ2 EJ3 EXP
 
 # =============================================================================
 # Built-in targets
