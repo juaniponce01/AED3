@@ -131,25 +131,7 @@ int main(){
 
         kruskal();
 
-//        // sacar las W-1 aristas de mayor peso
-//        for (int j = 0; j < W-1; j++){
-//            agm.pop_back();
-//        }
-//
-//        // calcular el peso total de las n-W+1 aristas
-//        for (auto & arista : agm){
-//            float p = get<0>(arista); // Peso
-//            int v = get<1>(arista); // Vertice 1
-//            int u = get<2>(arista); // Vertice 2
-//            if (puedoCable(oficinas[v], oficinas[u])) {
-//                res_UTP += p;
-//            } else {
-//                res_FO += p;
-//            }
-//        }
-
         result.emplace_back(res_UTP, res_FO);
-
     }
 
     for (int i = 0; i < result.size(); i++){
