@@ -6,68 +6,64 @@
 using namespace std;
 
 struct Calle {
-    long long d_i;
-    long long c_i;
-    long long l_i;
+    int d_i;
+    int c_i;
+    int l_i;
 };
-long long maxx = 188888888;
-vector<vector<pair<long long, long long>>> calles;
-vector<vector<pair<long long, long long>>> callesT;
+int max_int = int(pow(10, 8));
+vector<vector<pair<int, int>>> calles;
+vector<vector<pair<int, int>>> callesT;
 vector<Calle> callesBidireccionales;
-vector<long long> Ds, Dt, pred_s, pred_t;
+vector<int> Ds, Dt, pred_s, pred_t;
 vector<bool> visitado;
-priority_queue<pair<long long, long long>,vector<pair<long long, long long>>,greater<pair<long long, long long>>> Q;
-vector<long long> res;
-long long n, m, k, s, t;
+priority_queue<pair<int, int>> Q;
+vector<int> res;
+int n, m, k, s, t;
 
-void initialize_single_source(vector<long long>& D, vector<long long>& pred, long long source) {
+void initialize_single_source(vector<int>& D, vector<int>& pred, int source) {
     D.clear();
     pred.clear();
     visitado.clear();
-    D.resize(n+1, maxx);
+    D.resize(n+1, max_int);
     pred.resize(n + 1, -1);
     visitado.resize(n + 1, false);
 
-    Q.push(make_pair(0, source));
+    Q.emplace(0, source);
     D[source] = 0;
 }
 
-void relax(long long u, long long v, long long w, vector<long long>& D, vector<long long>& pred) {
+void relax(int u, int v, int w, vector<int>& D, vector<int>& pred) {
     if (D[v] > D[u] + w) {
         D[v] = D[u] + w;
         pred[v] = u;
     }
 }
 
-void Dijkstra(vector<vector<pair<long long, long long>>>& G, vector<long long>& D, vector<long long>& pred, long long source) {
+void Dijkstra(vector<vector<pair<int, int>>>& G, vector<int>& D, vector<int>& pred, int source) {
     initialize_single_source(D, pred, source);
 
     while (!Q.empty()) {
-        pair<long long, long long> u = Q.top();
+        int u = Q.top().second;
         Q.pop();
-        if (visitado[u.second]) {
-            continue;
-        }
-        visitado[u.second] = true;
+        if (visitado[u]) continue;
+        visitado[u] = true;
 
-        for (auto p : G[u.second]) {
-            long long v = p.first;
-            long long w = p.second;
-            relax(u.second, v, w, D, pred);
-            if (!visitado[v]) {
-                Q.push(make_pair(w, v));
-            }
+        for (auto p : G[u]) {
+            int v = p.first;
+            int w = p.second;
+            relax(u, v, w, D, pred);
+            Q.emplace(-D[v], v);
         }
     }
 }
 
 int main() {
-    long long c;
-    long long d_i, c_i, l_i;
-    long long mejorDist;
+    int c;
+    int d_i, c_i, l_i;
+    int mejorDist;
     cin >> c;
 
-    for (long long it = 0; it < c; it++) {
+    for (int it = 0; it < c; it++) {
         cin >> n >> m >> k >> s >> t;
         calles.clear();
         callesT.clear();
@@ -75,13 +71,13 @@ int main() {
         calles.resize(n + 1);
         callesT.resize(n + 1);
 
-        for (long long i = 0; i < m; i++) {
+        for (int i = 0; i < m; i++) {
             cin >> d_i >> c_i >> l_i;
             calles[d_i].emplace_back(c_i, l_i);
             callesT[c_i].emplace_back(d_i, l_i);
         }
 
-        for (long long j = 0; j < k; j++) {
+        for (int j = 0; j < k; j++) {
             cin >> d_i >> c_i >> l_i;
             callesBidireccionales.push_back({ d_i, c_i, l_i });
         }
@@ -92,9 +88,9 @@ int main() {
         mejorDist = Ds[t];
 
         for (auto& a : callesBidireccionales) {
-            long long u = a.d_i;
-            long long v = a.c_i;
-            long long w = a.l_i;
+            int u = a.d_i;
+            int v = a.c_i;
+            int w = a.l_i;
 
             if (Ds[u] + w + Dt[v] < mejorDist) {
                 mejorDist = Ds[u] + w + Dt[v];
@@ -104,7 +100,7 @@ int main() {
             }
         }
 
-        if (mejorDist >= maxx) {
+        if (mejorDist >= max_int) {
             res.push_back(-1);
         }
         else {
@@ -112,7 +108,7 @@ int main() {
         }
     }
 
-    for (long long r : res) {
+    for (int r : res) {
         cout << r << endl;
     }
 

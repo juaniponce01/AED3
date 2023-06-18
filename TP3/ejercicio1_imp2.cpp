@@ -1,55 +1,58 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <cmath>
 
 using namespace std;
 
 struct Calle {
-    long long d_i;
-    long long c_i;
-    long long l_i;
+    int d_i;
+    int c_i;
+    int l_i;
 };
-long long maxx = 188888888;
-vector<vector<pair<long long, long long>>> calles;
-vector<long long> Ds;
+int max_int = int(pow(10, 8));
+vector<vector<pair<int, int>>> calles;
+vector<vector<pair<int, int>>> callesT;
+vector<Calle> callesBidireccionales;
+vector<int> Ds, Dt, pred_s, pred_t;
 vector<bool> visitado;
-priority_queue<pair<long long, long long>,vector<pair<long long, long long>>,greater<pair<long long, long long>>> Q;
-vector<long long> res;
-long long n, m, k, s, t;
+priority_queue<pair<int, int>> Q;
+vector<int> res;
+int n, m, k, s, t;
 
-void initialize_single_source(vector<long long>& D, long long source) {
+void initialize_single_source(vector<int>& D, vector<int>& pred, int source) {
     D.clear();
-    D.resize(n*2+1, maxx);
-
+    pred.clear();
     visitado.clear();
-    visitado.resize(n*2+1, false);
+    D.resize(n+1, max_int);
+    pred.resize(n + 1, -1);
+    visitado.resize(n + 1, false);
 
     Q.emplace(0, source);
     D[source] = 0;
 }
 
-void relax(long long u, long long v, long long w, vector<long long>& D) {
+void relax(int u, int v, int w, vector<int>& D, vector<int>& pred) {
     if (D[v] > D[u] + w) {
         D[v] = D[u] + w;
+        pred[v] = u;
     }
 }
 
-void Dijkstra(vector<vector<pair<long long, long long>>>& G, vector<long long>& D, long long source) {
-    initialize_single_source(D, source);
+void Dijkstra(vector<vector<pair<int, int>>>& G, vector<int>& D, vector<int>& pred, int source) {
+    initialize_single_source(D, pred, source);
 
     while (!Q.empty()) {
-        pair<long long, long long> u = Q.top();
+        int u = Q.top().second;
         Q.pop();
-        if (visitado[u.second]) {continue;}
-        visitado[u.second] = true;
+        if (visitado[u]) continue;
+        visitado[u] = true;
 
-        for (auto p : G[u.second]) {
-            long long v = p.first;
-            long long w = p.second;
-            relax(u.second, v, w, D);
-            if (!visitado[v]) {
-                Q.emplace(w, v);
-            }
+        for (auto p : G[u]) {
+            int v = p.first;
+            int w = p.second;
+            relax(u, v, w, D, pred);
+            Q.emplace(-D[v], v);
         }
     }
 }
@@ -76,13 +79,16 @@ int main() {
             calles[c_i].emplace_back(d_i+n, l_i); //Creo la avenida entre G y G'
         }
 
-        Dijkstra(calles, Ds, s);
+        Dijkstra(calles, Ds, pred_s, s);
 
-        if (Ds[t+n] >= maxx) {
+        int minDist;
+        (Ds[t+n] > Ds[t]? minDist = Ds[t] : minDist = Ds[t+n]);
+
+        if (minDist >= max_int) {
             res.push_back(-1);
         }
         else {
-            res.push_back(Ds[t+n]);
+            res.push_back(minDist);
         }
     }
 
