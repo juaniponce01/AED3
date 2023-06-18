@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <climits>
+#include <cmath>
 
 using namespace std;
 
@@ -10,27 +10,25 @@ struct Calle {
     long long c_i;
     long long l_i;
 };
-
+long long maxx = 188888888;
 vector<vector<pair<long long, long long>>> calles;
 vector<vector<pair<long long, long long>>> callesT;
 vector<Calle> callesBidireccionales;
 vector<long long> Ds, Dt, pred_s, pred_t;
 vector<bool> visitado;
-priority_queue<long long> Q;
+priority_queue<pair<long long, long long>,vector<pair<long long, long long>>,greater<pair<long long, long long>>> Q;
 vector<long long> res;
 long long n, m, k, s, t;
 
 void initialize_single_source(vector<long long>& D, vector<long long>& pred, long long source) {
-    D.resize(n + 1);
-    pred.resize(n + 1);
-    visitado.resize(n + 1);
+    D.clear();
+    pred.clear();
+    visitado.clear();
+    D.resize(n+1, maxx);
+    pred.resize(n + 1, -1);
+    visitado.resize(n + 1, false);
 
-    for (long long i = 1; i <= n; i++) {
-        D[i] = INT_MAX;
-        pred[i] = -1;
-        visitado[i] = false;
-    }
-    Q.push(source);
+    Q.push(make_pair(0, source));
     D[source] = 0;
 }
 
@@ -45,19 +43,19 @@ void Dijkstra(vector<vector<pair<long long, long long>>>& G, vector<long long>& 
     initialize_single_source(D, pred, source);
 
     while (!Q.empty()) {
-        long long u = Q.top();
+        pair<long long, long long> u = Q.top();
         Q.pop();
-        if (visitado[u]) {
+        if (visitado[u.second]) {
             continue;
         }
-        visitado[u] = true;
+        visitado[u.second] = true;
 
-        for (auto p : G[u]) {
+        for (auto p : G[u.second]) {
             long long v = p.first;
             long long w = p.second;
-            relax(u, v, w, D, pred);
+            relax(u.second, v, w, D, pred);
             if (!visitado[v]) {
-                Q.push(v);
+                Q.push(make_pair(w, v));
             }
         }
     }
@@ -106,7 +104,7 @@ int main() {
             }
         }
 
-        if (mejorDist == Ds[t]) {
+        if (mejorDist >= maxx) {
             res.push_back(-1);
         }
         else {
