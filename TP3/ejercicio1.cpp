@@ -14,33 +14,30 @@ int max_int = int(pow(10, 8));
 vector<vector<pair<int, int>>> calles;
 vector<vector<pair<int, int>>> callesT;
 vector<Calle> callesBidireccionales;
-vector<int> Ds, Dt, pred_s, pred_t;
+vector<int> Ds, Dt;
 vector<bool> visitado;
-priority_queue<pair<int, int>> Q;
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> Q;
 vector<int> res;
 int n, m, k, s, t;
 
-void initialize_single_source(vector<int>& D, vector<int>& pred, int source) {
+void initialize_single_source(vector<int>& D, int source) {
     D.clear();
-    pred.clear();
     visitado.clear();
     D.resize(n+1, max_int);
-    pred.resize(n + 1, -1);
     visitado.resize(n + 1, false);
 
     Q.emplace(0, source);
     D[source] = 0;
 }
 
-void relax(int u, int v, int w, vector<int>& D, vector<int>& pred) {
+void relax(int u, int v, int w, vector<int>& D) {
     if (D[v] > D[u] + w) {
         D[v] = D[u] + w;
-        pred[v] = u;
     }
 }
 
-void Dijkstra(vector<vector<pair<int, int>>>& G, vector<int>& D, vector<int>& pred, int source) {
-    initialize_single_source(D, pred, source);
+void Dijkstra(vector<vector<pair<int, int>>>& G, vector<int>& D, int source) {
+    initialize_single_source(D, source);
 
     while (!Q.empty()) {
         int u = Q.top().second;
@@ -51,8 +48,8 @@ void Dijkstra(vector<vector<pair<int, int>>>& G, vector<int>& D, vector<int>& pr
         for (auto p : G[u]) {
             int v = p.first;
             int w = p.second;
-            relax(u, v, w, D, pred);
-            Q.emplace(-D[v], v);
+            relax(u, v, w, D);
+            Q.emplace(D[v], v);
         }
     }
 }
@@ -82,8 +79,8 @@ int main() {
             callesBidireccionales.push_back({ d_i, c_i, l_i });
         }
 
-        Dijkstra(calles, Ds, pred_s, s);
-        Dijkstra(callesT, Dt, pred_t, t);
+        Dijkstra(calles, Ds, s);
+        Dijkstra(callesT, Dt, t);
 
         mejorDist = Ds[t];
 
